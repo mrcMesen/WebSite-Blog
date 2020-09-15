@@ -9,18 +9,26 @@ export const WriteSkill = ({ fullText, nextText, textStyles }) => {
   const [startToWrite, setStartToWrite] = useState(false);
 
   useEffect(() => {
+    let componentMount = true;
     const timeOut = setTimeout(() => {
-      setStartToWrite(true);
+      componentMount && setStartToWrite(true);
     }, 2500);
-    return () => clearTimeout(timeOut);
+    return () => {
+      componentMount = false;
+      clearTimeout(timeOut);
+    };
   }, []);
 
   useEffect(() => {
+    let componentMount = true;
     if (startToWrite && textCount !== fullText.length) {
       const timeOut = setTimeout(() => {
-        setTextCount(actualCount => actualCount + 1);
+        componentMount && setTextCount(actualCount => actualCount + 1);
       }, 120);
-      return () => clearTimeout(timeOut);
+      return () => {
+        componentMount = false;
+        clearTimeout(timeOut);
+      };
     } else if (textCount === fullText.length) {
       nextText();
     }
@@ -30,7 +38,7 @@ export const WriteSkill = ({ fullText, nextText, textStyles }) => {
     <div className={classes.content}>
       <div className={classes.wrapperWriter}>
         <p className={textStyles}>
-          {fullText.substring(0, textCount)}{' '}
+          {fullText.substring(0, textCount)}
           <span
             className={clsx(classes.pointer, textCount !== fullText.length ? classes.writing : classes.noWriting)}
           />

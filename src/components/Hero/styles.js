@@ -1,16 +1,21 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(theme => ({
-  contentTitle: {
-    position: 'relative',
-    height: 200,
-    width: '100%',
+  contentHeroTitle: {
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: 300,
+    width: '100%',
     [theme.breakpoints.down('xs')]: {
       height: 100,
     },
+  },
+  contentTitle: {
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    position: 'relative',
   },
   contentSubTitle: {
     display: 'flex',

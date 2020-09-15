@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 
 import { Hero } from '$components/Hero';
 import { WrapperWriting } from '$components/WrapperWriting';
@@ -15,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     [theme.breakpoints.down('xs')]: {
-      paddingTop: 50,
+      paddingTop: 10,
     },
   },
 }));
