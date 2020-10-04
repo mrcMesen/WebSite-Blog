@@ -23,9 +23,12 @@ export const IconButtomBar = () => {
 
   const getActivePath = () => {
     if (!confirm) {
-      // console.log('Pathname: ', router.pathname);
+      console.log('Pathname: ', router.pathname);
       switch (router.pathname) {
         case '/Projects':
+          setActivePath('Projects');
+          break;
+        case '/Projects/[projectID]':
           setActivePath('Projects');
           break;
         case '/AboutMe':
@@ -107,7 +110,9 @@ export const IconButtomBar = () => {
           </a>
         </Link>
       </div>
-      <Typography variant='body2'>{activePath}</Typography>
+      <Typography variant='body2' className={classes.buttomName}>
+        {activePath}
+      </Typography>
     </div>
   );
 };

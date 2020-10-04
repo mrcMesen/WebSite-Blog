@@ -13,7 +13,7 @@ export const Hero = () => {
         </div>
       </div>
       <div className={classes.contentSubTitle}>
-        <img className={classes.sunglasses} src='/assets/images/sunglasses.webp' alt='sunglasses' />
+        <img className={classes.sunglasses} src='/assets/images/sunglasses.png' alt='sunglasses' />
         <Typography className={classes.developer}>SOFTWARE DEVELOPER</Typography>
         <Typography className={classes.skills}>SKILLS</Typography>
       </div>
