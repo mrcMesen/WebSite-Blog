@@ -18,7 +18,8 @@ export const TimeEvent = ({ event }) => {
             {subType.toUpperCase()}
           </Typography>
           <Typography variant='caption' className={classes.secondaryText}>
-            <b>{dateToStart.toDate().toLocaleDateString()}</b> to <b>{dateToEnd.toDate().toLocaleDateString()}</b>
+            <b>{dateToStart.toDate().toLocaleDateString()}</b> to{' '}
+            <b>{dateToEnd ? dateToEnd.toDate().toLocaleDateString() : 'Current'}</b>
           </Typography>
         </div>
         <Divider

@@ -46,12 +46,17 @@ export const useStyles = makeStyles(theme => ({
     fontSize: 12,
   },
   contentSkills: {
-    margin: '5px 0',
+    width: '100%',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   },
   chipEducation: {
+    margin: '1.5px',
     background: theme.palette.secondary.main,
   },
   chipJob: {
+    margin: '1.5px',
     background: 'rgb(179, 0, 0)',
   },
 }));

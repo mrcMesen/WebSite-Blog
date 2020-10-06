@@ -55,8 +55,19 @@ export default function Timeline() {
       const firestore = new Firestore('TimeLineEvents');
       const allEvents = await firestore.readAll();
       console.log('events', allEvents);
+      allEvents.sort((a, b) => {
+        if (a.dateToEnd === null) {
+          return -1;
+        }
+        if (b.dateToEnd === null) {
+          return 1;
+        }
+        if (a.dateToEnd.toDate().getTime() < b.dateToEnd.toDate().getTime()) {
+          return 1;
+        }
+        return -1;
+      });
       stillMounted && setEvents(allEvents);
-      // setEvents(allEvents);
     };
     getProject();
     return () => {
@@ -73,22 +84,6 @@ export default function Timeline() {
           <div className={classes.end} />
           <div className={classes.contentEvents}>
             {events.length !== 0 && events.map(event => <TimeEvent key={event.id} event={event} />)}
-            {/* <TimeEvent
-              type='Education'
-              dateToStart='00/01/2020'
-              dateToEnd='01/02/2020'
-              title='System Information Degree'
-              subTitle='System Information Degree'
-              skills={['Comunication', 'Test']}
-            />
-            <TimeEvent
-              type='Job'
-              dateToStart='00/01/2020'
-              dateToEnd='01/02/2020'
-              title='System Information Degree'
-              subTitle='System Information Degree'
-              skills={['Comunication', 'Test']}
-            /> */}
           </div>
         </div>
       </Container>
