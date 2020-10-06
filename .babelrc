@@ -12,7 +12,8 @@
           "$context": "./src/context",
           "$reducer": "./src/reducer",
           "$hooks": "./src/hooks",
-          "$assets": "./src/assets"
+          "$assets": "./src/assets",
+          "$services": "./services"
         }
       }
     ]

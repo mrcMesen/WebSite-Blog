@@ -1,33 +1,93 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Firestore from '$services/firestore';
+import Storage from '$services/storage';
+
 import { Layout } from '$layout';
+import { ImagesSet } from '$components/ImagesSet';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import { ImagesSet } from '$components/ImagesSet';
 
-import { useStyles } from './styles';
+import { makeStyles } from '@material-ui/core/styles';
+
+export const useStyles = makeStyles(theme => ({
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  center: {
+    textAlign: 'center',
+  },
+  justify: {
+    textAlign: 'justify',
+  },
+  techUsed: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'center',
+    [theme.breakpoints.down('sm')]: {
+      overflowX: 'scroll',
+    },
+  },
+  iconTech: {
+    margin: 8,
+    height: 90,
+    [theme.breakpoints.down('sm')]: {
+      height: 40,
+    },
+  },
+}));
+
 export default function Project() {
   const classes = useStyles();
+  const [project, setProject] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    let stillMounted = true;
+    const getProject = async () => {
+      const firestore = new Firestore('Projects');
+      const storage = new Storage();
+      const { projectID } = router.query;
+      const oProject = await firestore.read(projectID);
+      const nImagesRef = [];
+      for (let imageName of oProject.imagesList) {
+        const urlImage = await storage.read(`projects/${oProject.id}`, imageName);
+        nImagesRef.push(urlImage);
+      }
+      stillMounted && setProject({ ...oProject, imagesList: nImagesRef });
+    };
+    getProject();
+    return () => {
+      stillMounted = false;
+    };
+  }, []);
+
   return (
-    <Layout>
-      <Container maxWidth='lg'>
-        <Typography variant='h4' color='primary' className={classes.center} paragraph={true}>
-          Project Title
-        </Typography>
-        <Typography variant='body2' color='primary' className={classes.justify} paragraph={true}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-          typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-          sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-          PageMaker including versions of Lorem Ipsum.
-        </Typography>
-        <section className={classes.techUsed}>
-          {['react', 'node', 'materialui', 'firebase'].map(item => (
-            <img key={item} src={`/icons/techs/${item}.png`} alt='' className={classes.iconTech} />
-          ))}
-        </section>
-        <ImagesSet />
-      </Container>
+    <Layout loading={project === null}>
+      {project && (
+        <Container maxWidth='lg'>
+          <Typography variant='h4' color='primary' className={classes.center} paragraph={true}>
+            {project.title}
+          </Typography>
+          <Typography variant='body2' color='primary' className={classes.justify} paragraph={true}>
+            {project.description}
+          </Typography>
+          <section className={classes.techUsed}>
+            {project.tech.map(item => (
+              <img key={item} src={`/icons/techs/${item}.png`} alt='' className={classes.iconTech} />
+            ))}
+          </section>
+          <ImagesSet images={project.imagesList} />
+        </Container>
+      )}
     </Layout>
   );
+}
+
+export async function getServerSideProps(context) {
+  return {
+    props: {}, // will be passed to the page component as props
+  };
 }

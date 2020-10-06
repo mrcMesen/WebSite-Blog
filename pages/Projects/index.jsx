@@ -1,17 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Firestore from '../../services/firestore';
+import Storage from '../../services/storage';
 import { Layout } from '$layout';
 
-import { VerticalDivider } from '$components/VerticalDivider';
 import { ProjectCard } from '$components/ProjectCard';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 
-import { useStyles } from './styles';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  center: {
+    textAlign: 'center',
+  },
+  title: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+  },
+  projects: {
+    width: '100%',
+    height: '100%',
+  },
+}));
+
 export default function Projects() {
   const classes = useStyles();
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    let stillMounted = true;
+    const getProjects = async () => {
+      const firestore = new Firestore('Projects');
+      const storage = new Storage();
+      const listProjects = await firestore.readAll();
+      const finalListProjects = [];
+      for (let project of listProjects) {
+        // console.log(`projects/${project.id}`);
+        const urlImage = await storage.read(`projects/${project.id}`, project.image);
+        finalListProjects.push({ ...project, image: urlImage || '' });
+      }
+      stillMounted && setProjects(finalListProjects);
+    };
+    getProjects();
+    return () => {
+      stillMounted = false;
+    };
+  }, []);
+
   return (
-    <Layout>
+    <Layout loading={projects.length === 0}>
       <Container maxWidth='lg'>
         <section className={classes.title}>
           <Typography variant='h3' color='primary' className={classes.center}>
@@ -22,30 +64,11 @@ export default function Projects() {
           </Typography>
         </section>
         {/* <VerticalDivider /> */}
-        <div>
-          <ProjectCard
-            id={1}
-            title='Quickly Reported'
-            description=''
-            link='www.quicklyreported.com'
-            href='https://quicklyreported.com'
-            image='/assets/projects/qr/qreport.png'
-            startDate=''
-            endDate=''
-            tech={['javascript', 'react', 'materialui', 'node', 'firebase']}
-          />
-          <ProjectCard
-            id={2}
-            title='SIGE'
-            description=''
-            link='www.quicklyreported.com'
-            href=''
-            image='/assets/projects/sige/sige.png'
-            startDate=''
-            endDate=''
-            tech={['aspnet', 'csharp', 'mysql', 'bootstrap', 'azure']}
-          />
-        </div>
+        <section>
+          {projects.map(project => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </section>
       </Container>
     </Layout>
   );

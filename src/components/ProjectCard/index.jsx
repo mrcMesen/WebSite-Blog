@@ -7,7 +7,8 @@ import Button from '@material-ui/core/Button';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 
 import { useStyles } from './styles';
-export const ProjectCard = ({ id, title, description, link, href, image, tech, startDate, endDate }) => {
+export const ProjectCard = ({ project }) => {
+  const { id, title, description, link, href, image, tech, startDate, endDate } = project;
   const classes = useStyles();
   return (
     <div className={classes.content}>
@@ -23,13 +24,13 @@ export const ProjectCard = ({ id, title, description, link, href, image, tech, s
         ) : (
           <Typography>Private Project</Typography>
         )}
-        <Typography variant='h5'>{description}</Typography>
+        {/* <Typography variant='h5'>{description}</Typography> */}
         <div className={classes.wrapperIcons}>
           {tech.map(item => (
             <img key={item} src={`/icons/techs/${item}.png`} alt='' className={classes.techIcon} />
           ))}
         </div>
-        <Link href={`/Projects/${id}`}>
+        <Link href={`/Projects/${id}`} as={`/Projects/${id}`}>
           <a>
             <Button
               variant='outlined'

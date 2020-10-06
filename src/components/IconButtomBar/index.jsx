@@ -23,7 +23,7 @@ export const IconButtomBar = () => {
 
   const getActivePath = () => {
     if (!confirm) {
-      console.log('Pathname: ', router.pathname);
+      // console.log('Pathname: ', router.pathname);
       switch (router.pathname) {
         case '/Projects':
           setActivePath('Projects');

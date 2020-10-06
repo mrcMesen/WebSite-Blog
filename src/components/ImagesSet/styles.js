@@ -20,9 +20,9 @@ export const useStyles = makeStyles(theme => ({
   },
   smallImage: {
     border: 'solid 0.5px rgba(200,200,200,0.5)',
-    margin: 3,
+    margin: '5px 3px',
     height: 80,
-    width: 80,
+    width: 100,
     cursor: 'pointer',
     [theme.breakpoints.down('md')]: {
       height: 55,
