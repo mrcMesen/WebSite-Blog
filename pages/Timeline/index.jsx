@@ -11,8 +11,8 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
     margin: 'auto',
     width: 500,
-    [theme.breakpoints.down('md')]: {
-      width: 250,
+    [theme.breakpoints.down('sm')]: {
+      width: '90vw',
     },
   },
   line: {
@@ -54,7 +54,7 @@ export default function Timeline() {
     const getProject = async () => {
       const firestore = new Firestore('TimeLineEvents');
       const allEvents = await firestore.readAll();
-      console.log('events', allEvents);
+      // console.log('events', allEvents);
       allEvents.sort((a, b) => {
         if (a.dateToEnd === null) {
           return -1;

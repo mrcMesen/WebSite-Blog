@@ -12,14 +12,32 @@ export const useStyles = makeStyles(theme => ({
     borderRadius: 10,
     padding: '10px 10px 15px 10px',
     width: '100%',
+    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
+  iconType: {
+    fontSize: 14,
+    marginRight: 3,
+  },
+  iconTypeBg: {
+    bottom: 5,
+    left: 5,
+    position: 'absolute',
+    fontSize: 32,
+    color: 'rgba(100,100,100,0.2)',
+  },
   arrow: {
     marginTop: 5,
     marginLeft: -8,
+  },
+  arrowEducation: {
+    color: theme.palette.primary.main,
+  },
+  arrowJob: {
+    color: 'rgb(179, 0, 0)',
   },
   line: {
     width: '100%',
@@ -32,6 +50,10 @@ export const useStyles = makeStyles(theme => ({
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
+    [theme.breakpoints.down('sm')]: {
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+    },
   },
   educationLine: {
     backgroundColor: theme.palette.primary.main,

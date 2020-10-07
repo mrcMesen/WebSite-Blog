@@ -5,6 +5,8 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import Divider from '@material-ui/core/Divider';
+import WorkIcon from '@material-ui/icons/Work';
+import SchoolIcon from '@material-ui/icons/School';
 
 import { useStyles } from './styles';
 export const TimeEvent = ({ event }) => {
@@ -30,17 +32,28 @@ export const TimeEvent = ({ event }) => {
         </Typography>
         <Typography variant='caption'>{subTitle.toUpperCase()}</Typography>
         <div className={classes.contentSkills}>
-          {skills.map(skill => (
+          {skills.sort().map(skill => (
             <Chip
               key={skill}
               label={skill}
               color='secondary'
+              size='small'
               className={type === 'Job' || type === 'Project' ? classes.chipJob : classes.chipEducation}
             />
           ))}
         </div>
+        {type === 'Job' || type === 'Project' ? (
+          <WorkIcon className={classes.iconTypeBg} />
+        ) : (
+          <SchoolIcon className={classes.iconTypeBg} />
+        )}
       </div>
-      <PlayArrowIcon className={classes.arrow} color='primary' />
+      <PlayArrowIcon
+        className={clsx(
+          classes.arrow,
+          type === 'Job' || type === 'Project' ? classes.arrowJob : classes.arrowEducation
+        )}
+      />
     </div>
   );
 };
