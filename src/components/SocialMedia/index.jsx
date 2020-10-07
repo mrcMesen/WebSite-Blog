@@ -24,8 +24,8 @@ export const SocialMedia = () => {
   const classes = useStyles();
   return (
     <div className={classes.content}>
-      <div>
-        <p className={classes.info}>
+      <div className={classes.contentInfo}>
+        <p className={classes.textInfo}>
           <small>marco.mesenc@hotmail.com +506 8628 9397</small>
         </p>
       </div>

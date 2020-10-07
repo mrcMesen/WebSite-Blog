@@ -24,9 +24,7 @@ export const TimeEvent = ({ event }) => {
             <b>{dateToEnd ? dateToEnd.toDate().toLocaleDateString() : 'Current'}</b>
           </Typography>
         </div>
-        <Divider
-          className={clsx(classes.line, type === 'Job' || type === 'Project' ? classes.jobLine : classes.educationLine)}
-        />
+        <Divider className={clsx(classes.line, type === 'Job' ? classes.jobLine : classes.educationLine)} />
         <Typography variant='subtitle1' color='primary' className={classes.title}>
           {title.toUpperCase()}
         </Typography>
@@ -38,22 +36,13 @@ export const TimeEvent = ({ event }) => {
               label={skill}
               color='secondary'
               size='small'
-              className={type === 'Job' || type === 'Project' ? classes.chipJob : classes.chipEducation}
+              className={type === 'Job' ? classes.chipJob : classes.chipEducation}
             />
           ))}
         </div>
-        {type === 'Job' || type === 'Project' ? (
-          <WorkIcon className={classes.iconTypeBg} />
-        ) : (
-          <SchoolIcon className={classes.iconTypeBg} />
-        )}
+        {type === 'Job' ? <WorkIcon className={classes.iconTypeBg} /> : <SchoolIcon className={classes.iconTypeBg} />}
       </div>
-      <PlayArrowIcon
-        className={clsx(
-          classes.arrow,
-          type === 'Job' || type === 'Project' ? classes.arrowJob : classes.arrowEducation
-        )}
-      />
+      <PlayArrowIcon className={clsx(classes.arrow, type === 'Job' ? classes.arrowJob : classes.arrowEducation)} />
     </div>
   );
 };

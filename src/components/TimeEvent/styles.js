@@ -41,22 +41,21 @@ export const useStyles = makeStyles(theme => ({
   },
   line: {
     width: '100%',
-    height: 1.5,
   },
   jobLine: {
     backgroundColor: 'rgb(179, 0, 0)',
+  },
+  educationLine: {
+    backgroundColor: theme.palette.primary.main,
   },
   contentSubTitle: {
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
     [theme.breakpoints.down('sm')]: {
-      flexWrap: 'wrap',
-      justifyContent: 'center',
+      display: 'block',
+      textAlign: 'center',
     },
-  },
-  educationLine: {
-    backgroundColor: theme.palette.primary.main,
   },
   title: {
     marginTop: 6,
@@ -66,6 +65,9 @@ export const useStyles = makeStyles(theme => ({
     color: 'rgb(100,100,100)',
     letterSpacing: 1,
     fontSize: 12,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 11,
+    },
   },
   contentSkills: {
     width: '100%',
@@ -75,10 +77,10 @@ export const useStyles = makeStyles(theme => ({
   },
   chipEducation: {
     margin: '1.5px',
-    background: theme.palette.secondary.main,
+    background: theme.palette.secondary.dark,
   },
   chipJob: {
     margin: '1.5px',
-    background: 'rgb(179, 0, 0)',
+    background: 'rgba(179, 0, 0, 0.8)',
   },
 }));

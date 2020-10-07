@@ -9,11 +9,16 @@ export const useStyles = makeStyles(theme => ({
     width: '100%',
     marginTop: 10,
     marginBottom: 5,
-    // [theme.breakpoints.down('xs')]: {
-    //   height: 100,
-    // },
+    position: 'relative',
+    [theme.breakpoints.down('xs')]: {
+      height: 100,
+      // marginBottom: 24,
+    },
   },
-  info: {
+  contentInfo: {
+    backgroundColor: 'white',
+  },
+  textInfo: {
     textAlign: 'center',
     color: theme.palette.primary.main,
   },
