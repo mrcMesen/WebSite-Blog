@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { Layout } from '$layout';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -35,6 +36,11 @@ const useStyles = makeStyles(theme => ({
 export default function AboutMe() {
   const classes = useStyles();
   return (
+    <>
+    <Head>
+        <title>Marco Mesén - Software Engineer</title>
+        <meta name="description" content="Hi there! My Name is Marco Mesén Software Engineer from CR &#x1f1e8;&#x1f1f7;"/>
+      </Head>
     <Layout>
       <Container maxWidth='lg'>
         <section className={classes.title}>
@@ -65,12 +71,12 @@ export default function AboutMe() {
           family, who pushes me to be and give my best in every day of my life.
         </Typography>
         <section className={classes.familyPicture}>
-          <img className={classes.image} src='/assets/images/family.JPG' alt='Family' />
+          <img className={classes.image} src='/assets/images/family.JPG' alt='Marco Mesen Family' />
         </section>
         {/* <Typography variant='h5' color='primary' className={classes.center}>
           Hobbies
         </Typography> */}
       </Container>
-    </Layout>
+    </Layout></>
   );
 }

@@ -17,7 +17,7 @@ const clientCredentials = {
 if (typeof window !== 'undefined' && !firebase.apps.length) {
   // console.log(clientCredentials);
   firebase.initializeApp(clientCredentials);
-  // firebase.analytics();
+  firebase.analytics();
 }
 
 export default firebase;

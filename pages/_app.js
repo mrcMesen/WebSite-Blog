@@ -1,4 +1,5 @@
 import React from 'react';
+import firebase from '$services/firebase';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +14,10 @@ export default function MyApp(props) {
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
+    }
+    if (typeof window !== 'undefined' && !firebase.apps.length) {
+      // console.log(clientCredentials);
+      firebase.analytics();
     }
   }, []);
 

@@ -24,7 +24,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Marco Mesén Developer</title>
+        <title>Marco Mesén - Software Engineer</title>
+        <meta name="description" content="Hi there! My Name is Marco Mesén Software Engineer from CR &#x1f1e8;&#x1f1f7;"/>
       </Head>
       <Layout>
         <section className={classes.content}>

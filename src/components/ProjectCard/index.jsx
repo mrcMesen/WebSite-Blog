@@ -27,7 +27,7 @@ export const ProjectCard = ({ project }) => {
         {/* <Typography variant='h5'>{description}</Typography> */}
         <div className={classes.wrapperIcons}>
           {tech.map(item => (
-            <img key={item} src={`/icons/techs/${item}.png`} alt='' className={classes.techIcon} />
+            <img key={item} src={`/icons/techs/${item}.png`} alt={`${title} - ${description} - Marco Mesen Project`} className={classes.techIcon} />
           ))}
         </div>
         <Link href={`/Projects/${id}`} as={`/Projects/${id}`}>
